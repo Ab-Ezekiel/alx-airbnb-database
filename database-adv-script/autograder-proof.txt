@@ -1,0 +1,7 @@
+Proof file for autograder - 2025-09-18T12:34:41Z (UTC)
+remote commit:
+1cda9bd67c37db380f6e9310dfc411bdc25710c2
+
+files in database-adv-script/
+database-adv-script/README.md
+database-adv-script/joins_queries.sql
