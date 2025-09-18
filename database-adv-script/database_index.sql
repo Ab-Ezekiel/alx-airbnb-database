@@ -50,3 +50,22 @@ CREATE INDEX IF NOT EXISTS idx_properties_created_at ON properties (created_at);
 -- DROP INDEX idx_payments_booking_id ON payments;
 -- DROP INDEX idx_bookings_created_at ON bookings;
 -- DROP INDEX idx_properties_created_at ON properties;
+
+
+-- Measure performance before/after indexes
+
+-- Example 1: property price filter and join
+EXPLAIN ANALYZE
+SELECT p.property_id, p.name
+FROM properties p
+LEFT JOIN reviews r ON p.property_id = r.property_id
+WHERE p.pricepernight BETWEEN 40 AND 100
+ORDER BY p.pricepernight
+LIMIT 50;
+
+-- Example 2: booking availability check
+EXPLAIN ANALYZE
+SELECT b.*
+FROM bookings b
+WHERE b.property_id = 'c3df9e9c-91a9-11f0-b5c5-80ce629dfc40'
+  AND NOT (b.end_date <= '2025-06-10' OR b.start_date >= '2025-06-13');
